@@ -32,6 +32,7 @@ class Ia{
        
     }
     
+    
     function create_map($filename){
         $k = $i = $j = 0;
         $handle = fopen($filename, "r");
