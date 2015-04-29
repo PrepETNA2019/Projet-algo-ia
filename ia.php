@@ -28,13 +28,13 @@ class Ia{
             echo "le 3eme arguments n'est pas un fichier ou n'est pas en lecture: fin du programme\n";
             return false;
         }
-        Ia::create_map($argv[2]);
+        Ia::create_map($argv[3]);
        
     }
     
     function create_map($filename){
         $k = $i = $j = 0;
-        $handle = fopen("$filename", "r");
+        $handle = fopen($filename, "r");
         $map = array();
         $content = fread($handle, filesize($filename));
         for ($k =0; isset($content[$k]);$k++){
