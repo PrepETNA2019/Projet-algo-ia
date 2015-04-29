@@ -28,7 +28,7 @@ class Ia{
             echo "le 3eme arguments n'est pas un fichier ou n'est pas en lecture: fin du programme\n";
             return false;
         }
-        Ia::create_map_test();
+        Ia::create_map();
        
     }
     
