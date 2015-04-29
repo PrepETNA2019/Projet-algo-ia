@@ -28,14 +28,13 @@ class Ia{
             echo "le 3eme arguments n'est pas un fichier ou n'est pas en lecture: fin du programme\n";
             return false;
         }
-        Ia::create_map();
+        Ia::create_map($argv[2]);
        
     }
     
-    function create_map(){
+    function create_map($filename){
         $k = $i = $j = 0;
-        $filename = "map.txt";
-        $handle = fopen($filename, "r");
+        $handle = fopen("$filename", "r");
         $map = array();
         $content = fread($handle, filesize($filename));
         for ($k =0; isset($content[$k]);$k++){
@@ -51,21 +50,10 @@ class Ia{
                 $i++;
             }
         }
+        $this->carte = $map;
     }
     
-    /*function create_map_test(){
-        $map[0] = array(' ','@',' ','+',' ',' ','+',' ',' ', ' ');
-        $map[1] = array(' ','+',' ',' ','+',' ',' ',' ',' ', ' ');
-        $map[2] = array(' ',' ',' ',' ',' ',' ',' ',' ',' ', ' ');
-        $map[3] = array(' ','+',' ','+','+',' ',' ',' ','+', ' ');
-        $map[4] = array(' ',' ',' ',' ',' ',' ',' ',' ',' ', ' ');
-        $map[5] = array(' ','+',' ',' ','+',' ',' ',' ',' ', ' ');
-        $map[6] = array(' ',' ',' ',' ',' ',' ',' ',' ',' ', ' ');
-        $map[7] = array(' ',' ',' ',' ',' ',' ','+',' ','#', ' ');
-        $map[8] = array(' ',' ',' ',' ',' ',' ',' ',' ',' ', ' ');
-        $map[9] = array(' ','+',' ',' ','+',' ',' ',' ',' ', ' ');
-        $this->carte = $map;
-    }*/
+  
 }
 
 $ia_test = new Ia($argc, $argv);
