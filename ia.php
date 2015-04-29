@@ -34,20 +34,19 @@ class Ia{
     
     
     function create_map($filename){
-        $k = $i = $j = 0;
+        $i = 0;
+        $j = 0;
         $handle = fopen($filename, "r");
         $map = array();
         $content = fread($handle, filesize($filename));
-        for ($k =0; isset($content[$k]);$k++){
+        for ($k = 0; isset($content[$k]);$k++){
             if ($content[$k] == "\n"){
-                echo $j."if\n";
                 $i = 0;
                 $j++;
                 $map[$i][$j] = $content[$k];
             }
             else{
                 $map[$i][$j] = $content[$k];
-                echo $i."else\n";
                 $i++;
             }
         }
