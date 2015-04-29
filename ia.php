@@ -32,7 +32,28 @@ class Ia{
        
     }
     
-    function create_map_test(){
+    function create_map(){
+        $k = $i = $j = 0;
+        $filename = "map.txt";
+        $handle = fopen($filename, "r");
+        $map = array();
+        $content = fread($handle, filesize($filename));
+        for ($k =0; isset($content[$k]);$k++){
+            if ($content[$k] == "\n"){
+                echo $j."if\n";
+                $i = 0;
+                $j++;
+                $map[$i][$j] = $content[$k];
+            }
+            else{
+                $map[$i][$j] = $content[$k];
+                echo $i."else\n";
+                $i++;
+            }
+        }
+    }
+    
+    /*function create_map_test(){
         $map[0] = array(' ','@',' ','+',' ',' ','+',' ',' ', ' ');
         $map[1] = array(' ','+',' ',' ','+',' ',' ',' ',' ', ' ');
         $map[2] = array(' ',' ',' ',' ',' ',' ',' ',' ',' ', ' ');
@@ -44,7 +65,7 @@ class Ia{
         $map[8] = array(' ',' ',' ',' ',' ',' ',' ',' ',' ', ' ');
         $map[9] = array(' ','+',' ',' ','+',' ',' ',' ',' ', ' ');
         $this->carte = $map;
-    }
+    }*/
 }
 
 $ia_test = new Ia($argc, $argv);
