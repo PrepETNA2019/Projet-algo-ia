@@ -44,6 +44,9 @@ class Ia{
                 $valide = false;
                 Ia::var_map();
             }
+            else {
+                Ia::var_map();
+            }
             echo "\n\n\n\n";
         }
         
