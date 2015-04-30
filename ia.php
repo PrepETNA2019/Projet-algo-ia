@@ -2,6 +2,7 @@
 
     define('PLAYER','@');
     define('ENERGIE','+');
+    define('TRACE','*');
     define('SORTIE','#');
 
 
@@ -9,6 +10,7 @@ class Ia{
     var $energie_start;
     var $energie_drop;
     var $distance;
+    var $nb_moved = 0;
     var $ia;
     var $sortie;
     var $carte;
@@ -33,24 +35,92 @@ class Ia{
             return false;
         }
         Ia::create_map($argv[3]);
-        echo PLAYER;
+        Ia::var_map();
+    }
+    
+    function var_map(){
+        foreach ($this->carte as $ligne){
+            foreach ($ligne as $case){
+                echo $case;
+            }
+            echo "\n";   
+        }
+    }
+    
+    function radar(){
+        
+    }
+    
+    function move(){
+        $this->nb_moved++;
+        if ($ia['x'] <= $sortie['x']){
+            if ($ia['y'] <= $sortie['y']){
+                if ($this->nb_moved / 2 == 0){
+                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                    $this->ia['x']++;
+                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                }
+                else{
+                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                    $this->ia['y']++;
+                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                }
+            }
+            else{
+                if ($this->nb_moved / 2 == 0){
+                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                    $this->ia['x']--;
+                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                }
+                else{
+                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                    $this->ia['y']--;
+                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                }
+            }
+        }
+        else{
+            if ($ia['y'] <= $sortie['y']){
+                if ($this->nb_moved / 2 == 0){
+                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                    $this->ia['x']++;
+                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                }
+                else{
+                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                    $this->ia['y']++;
+                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                }
+            }
+            else{
+                if ($this->nb_moved / 2 == 0){
+                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                    $this->ia['x']--;
+                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                }
+                else{
+                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                    $this->ia['y']--;
+                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                }
+            }
+        }
     }
     
     function create_map($filename){
-        $i = 0;
-        $j = 0;
+        $x = 0;
+        $y = 0;
         $handle = fopen($filename, "r");
         $map = array();
         $content = fread($handle, filesize($filename));
-        for ($k = 0; isset($content[$k]);$k++){
-            if ($content[$k] == "\n"){
-                $i = 0;
-                $j++;
-                $map[$i][$j] = $content[$k];
+        for ($f = 0; isset($content[$f]);$f++){
+            if ($content[$f] == "\n"){
+                $x++;
+                $y = 0;
             }
             else{
-                $map[$i][$j] = $content[$k];
-                $i++;
+                $map[$x][$y] = $content[$f];
+                $y++;
             }
         }
         $this->carte = $map;
