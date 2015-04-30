@@ -42,7 +42,7 @@ class Ia{
             echo "\n energie = $this->nb_moved \n\n";
             if (!Ia::move()){
                 $valide = false;
-            Ia::var_map();
+                Ia::var_map();
             }
             echo "\n\n\n\n";
         }
