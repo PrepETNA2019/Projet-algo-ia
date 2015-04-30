@@ -128,61 +128,129 @@ class Ia{
         //cas deplacement lateral vers logitude/latitude
         if ($this->ia['x'] > $this->sortie['x']){
             if ($this->ia['y'] < $this->sortie['y']){
-                if ($this->nb_moved % 2 == 0){
-                    echo "\n////////// if if if x++\n";
-                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
-                    $this->ia['x']++;
-                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                if ($this->carte[($this->ia['x']) - 1][$this->ia['y']] == ENERGIE ||
+                   $this->carte[$this->ia['x']][($this->ia['y']) + 1] == ENERGIE){
+                    if ($this->carte[$this->ia['x'] - 1][$this->ia['y']] == ENERGIE){
+                        echo "\n////////// 1 energie drop x++\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['x']--;//++
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
+                    else{
+                        echo "\n////////// 2 energie drop y++\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['y']++;
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
                 }
                 else{
-                    echo "\n////////// if if else y++\n";
-                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
-                    $this->ia['y']++;
-                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    if ($this->nb_moved % 2 == 0){
+                        echo "\n////////// if if if x++\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['x']--;//++
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
+                    else{
+                        echo "\n////////// if if else y++\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['y']++;
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
                 }
             }
             else{
-                if ($this->nb_moved % 2 == 0){
-                    echo "\n////////// if else if x--\n";
-                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
-                    $this->ia['x']--;
-                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                if ($this->carte[$this->ia['x'] - 1][$this->ia['y']] == ENERGIE ||
+                   $this->carte[$this->ia['x']][$this->ia['y'] - 1] == ENERGIE){
+                    if ($this->carte[$this->ia['x'] - 1][$this->ia['y']] == ENERGIE){
+                        echo "\n////////// 3 energie drop x--\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['x']--;
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
+                    else{
+                        echo "\n////////// 4 energie drop y--\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['y']--;
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
                 }
                 else{
-                    echo "\n////////// if else else y--\n";
-                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
-                    $this->ia['y']--;
-                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    if ($this->nb_moved % 2 == 0){
+                        echo "\n////////// if else if x--\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['x']--;
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
+                    else{
+                        echo "\n////////// if else else y--\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['y']--;
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
                 }
             }
         }
         else{
             if ($this->ia['y'] > $this->sortie['y']){
-                if ($this->nb_moved % 2 == 0){
-                    echo "\n////////// else if if x++\n";
-                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
-                    $this->ia['x']++;
-                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                if ($this->carte[$this->ia['x'] + 1][$this->ia['y']] == ENERGIE ||
+                   $this->carte[$this->ia['x']][$this->ia['y'] + 1] == ENERGIE){
+                    if ($this->carte[$this->ia['x'] + 1][$this->ia['y']] == ENERGIE){
+                        echo "\n////////// 5 energie drop x++\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['x']++;
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
+                    else{
+                        echo "\n////////// 6 energie drop y++\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['y']++;
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
                 }
                 else{
-                    echo "\n//////////  else if else y--\n";
-                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
-                    $this->ia['y']--;
-                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    if ($this->nb_moved % 2 == 0){
+                        echo "\n////////// else if if x++\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['x']++;
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
+                    else{
+                        echo "\n//////////  else if else y--\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['y']--;
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
                 }
             }
             else{
-                if ($this->nb_moved % 2 == 0){
-                    echo "\n////////// else else if x--\n";
-                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
-                    $this->ia['x']--;
-                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                if ($this->carte[$this->ia['x'] - 1][$this->ia['y']] == ENERGIE ||
+                   $this->carte[$this->ia['x']][$this->ia['y'] + 1] == ENERGIE){
+                    if ($this->carte[$this->ia['x'] + 1][$this->ia['y']] == ENERGIE){
+                        echo "\n////////// 7 energie drop x--\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['x']--;
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
+                    else{
+                        echo "\n////////// 8 energie drop y++\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['y']++;
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
                 }
                 else{
-                    echo "\n////////// else else else y++\n";
-                    $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
-                    $this->ia['y']++;
-                    $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    if ($this->nb_moved % 2 == 0){
+                        echo "\n////////// else else if x--\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['x']--;
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
+                    else{
+                        echo "\n////////// else else else y++\n";
+                        $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
+                        $this->ia['y']++;
+                        $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
+                    }
                 }
             }
         }
