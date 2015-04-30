@@ -130,7 +130,7 @@ class Ia{
                 if ($this->nb_moved % 2 == 0){
                     echo "\n////////// if if if x++\n";
                     $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
-                    $this->ia['x']++;
+                    $this->ia['x']--;
                     $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
                 }
                 else{
@@ -174,7 +174,7 @@ class Ia{
                 if ($this->nb_moved % 2 == 0){
                     echo "\n////////// else else if x--\n";
                     $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
-                    $this->ia['x']--;
+                    $this->ia['x']++;
                     $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
                 }
                 else{
