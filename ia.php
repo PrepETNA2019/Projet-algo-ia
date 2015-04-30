@@ -54,8 +54,8 @@ class Ia{
     }
     
     function distance(){
-        $this->distance= abs($this->ia['x'] - $this->sortie['x'] +
-                            $this->ia['y'] - $this->sortie['y']);
+        $this->distance= abs($this->ia['x'] - $this->sortie['x']) +
+            abs ($this->ia['y'] - $this->sortie['y']);
         return ($this->distance < 0 ? false : true);
     }
     
@@ -84,7 +84,8 @@ class Ia{
     }
     
     function radar(){
-        
+        if ($this->carte[$this->ia['x']][$this->ia['y']] == ENERGIE)
+            echo "test";
     }
     
     function move(){
@@ -130,7 +131,7 @@ class Ia{
                 if ($this->nb_moved % 2 == 0){
                     echo "\n////////// if if if x++\n";
                     $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
-                    $this->ia['x']--;
+                    $this->ia['x']++;
                     $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
                 }
                 else{
@@ -174,7 +175,7 @@ class Ia{
                 if ($this->nb_moved % 2 == 0){
                     echo "\n////////// else else if x--\n";
                     $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
-                    $this->ia['x']++;
+                    $this->ia['x']--;
                     $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
                 }
                 else{
