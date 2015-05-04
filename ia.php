@@ -15,6 +15,13 @@ class Ia{
     var $sortie;
     var $carte;
     
+    
+    /**
+     * Constructeur de l'IA avec gestion d'erreur.
+     * @param  integer $argc nombre d'argument
+     * @param  array $argv tableau d'arguments, ces arguments sont verifier.
+     * @return boolean  [[Description]]
+     */
     function __construct($argc, $argv){
         if ($argc != 4){
             echo "vous n'avez pas respecté les parametres\n";
@@ -38,7 +45,7 @@ class Ia{
         Ia::check();
         Ia::distance();
         //$valide = true;
-        for ($this->nb_moved = 1; $this->energie_start >= 0 && Ia::move(); $this->nb_moved++){
+        for ($this->nb_moved = 1; $this->energie_start > 0 && Ia::move(); $this->nb_moved++){
             echo "\n\n energie: $this->energie_start | deplacement: $this->nb_moved | distance de depart: $this->distance \n\n";
             Ia::var_map();
             echo "\n\n";
@@ -52,12 +59,19 @@ class Ia{
         }
     }
     
+    /**
+     * donne la distance a parcourir block par block
+     * @return boolean return true si il est inferieur a 0.
+     */
     function distance(){
         $this->distance= abs($this->ia['x'] - $this->sortie['x']) +
             abs ($this->ia['y'] - $this->sortie['y']);
         return ($this->distance < 0 ? false : true);
     }
     
+    /**
+     * Initialisateur des parametres de l'ia
+     */
     function check(){
         for ($x = 0; isset($this->carte[$x]); $x++){
             for ($y = 0; isset($this->carte[$x][$y]); $y++){
@@ -73,6 +87,9 @@ class Ia{
         }
     }
     
+    /**
+     * Affiche la carte pour les humains
+     */
     function var_map(){
         foreach ($this->carte as $ligne){
             foreach ($ligne as $case){
@@ -82,11 +99,11 @@ class Ia{
         }
     }
     
-    function radar(){
-        if ($this->carte[$this->ia['x']][$this->ia['y']] == ENERGIE)
-            echo "test";
-    }
     
+    /**
+     * Gestion des déplacements de l'ia avec une gestion des preferances de parcours si une energie est proche
+     * @return boolean return true si une action a ete fait.
+     */
     function move(){
         if ($this->ia['x'] == $this->sortie['x'] && $this->ia['y'] == $this->sortie['y'])
             return false;
@@ -131,7 +148,7 @@ class Ia{
                    $this->carte[$this->ia['x']][($this->ia['y']) + 1] == ENERGIE){
                     if ($this->carte[$this->ia['x'] - 1][$this->ia['y']] == ENERGIE){
                         $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
-                        $this->ia['x']--;//++
+                        $this->ia['x']--;
                         $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
                     }
                     else{
@@ -144,7 +161,7 @@ class Ia{
                 else{
                     if ($this->nb_moved % 2 == 0){
                         $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
-                        $this->ia['x']--;//++
+                        $this->ia['x']--;
                         $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
                     }
                     else{
@@ -186,7 +203,7 @@ class Ia{
         else{
             if ($this->ia['y'] > $this->sortie['y']){
                 if ($this->carte[$this->ia['x'] + 1][$this->ia['y']] == ENERGIE ||
-                   $this->carte[$this->ia['x']][$this->ia['y'] + 1] == ENERGIE){
+                   $this->carte[$this->ia['x']][$this->ia['y'] - 1] == ENERGIE){
                     if ($this->carte[$this->ia['x'] + 1][$this->ia['y']] == ENERGIE){
                         $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
                         $this->ia['x']++;
@@ -194,7 +211,7 @@ class Ia{
                     }
                     else{
                         $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
-                        $this->ia['y']++;
+                        $this->ia['y']--;
                         $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
                     }
                     $this->energie_start += $this->energie_drop;
@@ -243,7 +260,10 @@ class Ia{
         }
         return true;
     }
-    
+    /**
+     * Creation de la carte
+     * @param string $filename Nom du fichier text
+     */
     function create_map($filename){
         $x = 0;
         $y = 0;
