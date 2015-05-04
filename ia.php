@@ -37,27 +37,19 @@ class Ia{
         Ia::create_map($argv[3]);
         Ia::check();
         Ia::distance();
-        $valide = true;
-        for ($this->nb_moved = 0; $this->energie_start >= 0 && $valide; $this->nb_moved++){
-            echo "\n energie: $this->energie_start | deplacement: $this->nb_moved | distance de depart: $this->distance \n\n";
-            if (!Ia::move()){
-                $valide = false;
-                echo "\n carte final: \n";
-                Ia::var_map();
-            }
-            else {
-                Ia::var_map();
-            }
-            echo "\n\n\n\n";
+        //$valide = true;
+        for ($this->nb_moved = 1; $this->energie_start >= 0 && Ia::move(); $this->nb_moved++){
+            echo "\n\n energie: $this->energie_start | deplacement: $this->nb_moved | distance de depart: $this->distance \n\n";
+            Ia::var_map();
+            echo "\n\n";
         }
+        $this->nb_moved--;
         if ($this->ia['x'] == $this->sortie['x'] && $this->ia['y'] == $this->sortie['y']){
             echo "\n vous avez réussi !\n\n";
         }
         else{
             echo "pas bon, dsl... \n\n";   
         }
-        
-        
     }
     
     function distance(){
@@ -115,14 +107,12 @@ class Ia{
         }
         if ($this->ia['y'] == $this->sortie['y']){
             if ($this->ia['x'] < $this->sortie['x']){
-                echo "\n////////// X ok, y > donc y++\n";
                 $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
                 $this->ia['x']++;
                 $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
                 return true;
             }
             else{
-                echo "\n////////// X ok, y > donc y--\n";
                 $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
                 $this->ia['x']--;
                 $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
