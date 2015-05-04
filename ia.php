@@ -45,10 +45,10 @@ class Ia{
         }
         $this->nb_moved--;
         if ($this->ia['x'] == $this->sortie['x'] && $this->ia['y'] == $this->sortie['y']){
-            echo "\n vous avez réussi !\n\n";
+            echo "\nOK\n\n";
         }
         else{
-            echo "pas bon, dsl... \n\n";   
+            echo "\nKO\n\n";   
         }
     }
     
@@ -95,12 +95,14 @@ class Ia{
             if ($this->ia['y'] < $this->sortie['y']){
                 $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
                 $this->ia['y']++;
+                $this->energie_start = ($this->carte[$this->ia['x']][$this->ia['y']] == ENERGIE ? $this->energie_start + $this->energie_drop : $this->energie_start);
                 $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
                 return true;
             }
             else{
                 $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
                 $this->ia['y']--;
+                $this->energie_start = ($this->carte[$this->ia['x']][$this->ia['y']] == ENERGIE ? $this->energie_start + $this->energie_drop : $this->energie_start);
                 $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
                 return true;
             }
@@ -109,12 +111,14 @@ class Ia{
             if ($this->ia['x'] < $this->sortie['x']){
                 $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
                 $this->ia['x']++;
+                $this->energie_start = ($this->carte[$this->ia['x']][$this->ia['y']] == ENERGIE ? $this->energie_start + $this->energie_drop : $this->energie_start);
                 $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
                 return true;
             }
             else{
                 $this->carte[$this->ia['x']][$this->ia['y']] = TRACE;
                 $this->ia['x']--;
+                $this->energie_start = ($this->carte[$this->ia['x']][$this->ia['y']] == ENERGIE ? $this->energie_start + $this->energie_drop : $this->energie_start);
                 $this->carte[$this->ia['x']][$this->ia['y']] = PLAYER;
                 return true;
             }
